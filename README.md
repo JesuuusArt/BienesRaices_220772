@@ -12,11 +12,12 @@ Para poder demostrar y aprender la creacion y consumo de Interfaces de Programac
 |9.|22/10/2024|Creacion de una Aplicacion web usando Express|11|⭐Activa|
 
 
-
+### Tech Stack
+![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) 
+![Express](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
+---
 
 ### Autor
 Creado por: **Jesus Alejandro Artiaga Morales** / [@JesuuusArt](https://github.com/JesuuusArt)
 ---
-Unidad 2
-Aplicaciones Web Orientadas a Servicios
-Octubre 2024
+Unidad 2 - Aplicaciones Web Orientadas a Servicios - Octubre 2024
