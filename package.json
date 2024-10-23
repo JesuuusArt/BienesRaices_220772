@@ -1,0 +1,37 @@
+{
+  "name": "mx.utxj.ti.bienesraices",
+  "version": "1.0.0",
+  "description": "Proyecto de Clase para la Unidad 2 de AWOS, utilizando Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JesuuusArt/BienesRaices_220772.git"
+  },
+  "keywords": [
+    "MVC",
+    "Express",
+    "Sequelize",
+    "MySQL",
+    "TailwindCSS",
+    "Nodemon",
+    "NodeJS",
+    "PUG",
+    "NodeMailer",
+    "JWT"
+  ],
+  "author": "Jesus Alejandro Artiaga Morales",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JesuuusArt/BienesRaices_220772/issues"
+  },
+  "homepage": "https://github.com/JesuuusArt/BienesRaices_220772#readme",
+  "dependencies": {
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
