@@ -8,7 +8,10 @@ import userRoutes from './routes/userRoutes.js'
 // ? Importar la libreria para crear un servidor web - CommonJS / ECMA Script 6
 // ? Instanciar nuestra aplicacion web
 import express from 'express'
+
 const app = express()
+app.set('view engine', 'pug')
+app.set('Views', '/.Views')
 
 const port = 3000
 
