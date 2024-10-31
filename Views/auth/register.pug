@@ -1,2 +1,23 @@
-div
-    h2.text-center.text-6xl Crea tu cuenta
+extends ../layout/index
+
+block contenido
+    div.py-10
+        h1.text-4xl.my-10.font-extrabold.text-center.text-orange-500 Bienes 
+            span.font-normal.text-black Raices
+        h2.text-center.text-2xl.font-extrabold=page
+
+        .mt-8.mx-auto.max-w-md
+            .bg-white.py-8.px-4.shadow
+                form
+                    div 
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold Ingresa tu nombre
+                        input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu nombre" type="text" name="nombre")
+                    div 
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold Ingresa tu email
+                        input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu email" type="email" name="email")
+                    div 
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold Ingresa tu contraseña
+                        input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu contraseña" type="password" name="password")
+
+                        label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold Confirma tu contraseña
+                        input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Confirma tu contraseña" type="password" name="password")
