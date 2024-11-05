@@ -23,4 +23,4 @@ app.listen(port, () =>
 
 // ? Routing - Enrutacion para peticiones
 app.use('/', generalRoutes) // ? Importando de las rutas del archivo generalRoutes.js
-app.use('/usuario/', userRoutes) // ? Importando de las rutas del archivo userRoutes.js
+app.use('/', userRoutes) // ? Importando de las rutas del archivo userRoutes.js
