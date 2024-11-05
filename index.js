@@ -8,7 +8,13 @@ import userRoutes from './routes/userRoutes.js'
 // ? Importar la libreria para crear un servidor web - CommonJS / ECMA Script 6
 // ? Instanciar nuestra aplicacion web
 import express from 'express'
+
 const app = express()
+app.set('view engine', 'pug')
+app.set('Views', '/.Views')
+
+// ? Carpeta publica de recursos estaticos (assets)
+app.use(express.static('public'))
 
 const port = 3000
 
@@ -17,4 +23,4 @@ app.listen(port, () =>
 
 // ? Routing - Enrutacion para peticiones
 app.use('/', generalRoutes) // ? Importando de las rutas del archivo generalRoutes.js
-app.use('/usuario/', userRoutes) // ? Importando de las rutas del archivo userRoutes.js
+app.use('/', userRoutes) // ? Importando de las rutas del archivo userRoutes.js

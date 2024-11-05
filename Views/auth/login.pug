@@ -1,0 +1,23 @@
+extends ../layout/index
+
+block contenido
+    div.py-10
+        h1.text-4xl.my-10.font-extrabold.text-center.text-orange-500 Bienes 
+            span.font-normal.text-black Raices
+        h2.text-center.text-2xl.font-extrabold= page
+
+        .mt-8.mx-auto.max-w-lg
+            .bg-white.py-8.px-6.rounded-md.shadow-md
+                form(action="/login" method="post").space-y-5
+                    div.mb-5
+                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Ingresa tu email:
+                        input#email.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu email" type="email" name="email" required)
+                    div.mb-5
+                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Ingresa tu contraseña:
+                        input#password.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu contraseña" type="password" name="password" required)
+
+                    input(class="w-full bg-orange-600 text-white hover:bg-black font-bold py-3 cursor-pointer" type="submit" value="Iniciar sesión")
+
+                    .flex.items-center.justify-between
+                        a.text-sm.text-gray-400(href="/register" class="hover:text-orange-500") ¿No tienes una cuenta? Crea una
+                        a.text-sm.text-gray-400(href="/passwordRecovery" class="hover:text-orange-500") ¿Olvidaste tu contraseña? Recupérala

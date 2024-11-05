@@ -55,3 +55,4 @@ No se puede crear el objeto router sin importar express
 ¿cuales son los 2 elementos que define una ruta o un end point? 1. La ruta? 2. El callback o la funcion call back de lo que va a hacer
 ¿Que es ECMA Script 6?¿Que es CommonJS?
 ¿Puede el navegador acceder a cualquier ruta http como post, patch?
+¿Para que sirve npx tailwind init -p?

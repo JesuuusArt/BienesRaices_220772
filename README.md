@@ -9,8 +9,10 @@ Para poder demostrar y aprender la creacion y consumo de Interfaces de Programac
 |No.|Fecha|Descripcion|Potenciador|Estatus|
 |--|--|--|--|--|
 |8.|17/10/2024|Nuevo Repositorio del proyecto implementando .gitignore|1|✅Finalizada|
-|9.|22/10/2024|Creacion de una Aplicacion web usando Express|11|✅Finalizada|
-|10.|23/10/2024|Operaciones Basicas de un API a traves de los verbos HTTP|Pendiente|⭐Activa|
+|9.|22/10/2024|Creacion de una Aplicacion web usando Express|12|✅Finalizada|
+|10.|23/10/2024|Operaciones Basicas de un API a traves de los verbos HTTP|12|✅Finalizada|
+|11.|05/11/2024|Implementacion de las pantallas de registro, logeo y recuperacion de contraseña|13|✅Finalizada|
+|12.|.|.|pendiente|⭐Activa|
 
 
 ### Tech Stack
