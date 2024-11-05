@@ -1,5 +1,6 @@
 import generalRoutes from './routes/generalRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import db from "./db/config.js"
 
 // ? Ejemplo de activacion de HOT RELOAD
 //console.log("Hola desde NodeJS, esto esta en hot reload")
@@ -15,6 +16,14 @@ app.set('Views', '/.Views')
 
 // ? Carpeta publica de recursos estaticos (assets)
 app.use(express.static('public'))
+
+// ? Conexion a la base de datos
+try {
+    await db.authenticate()
+    console.log("Conexion correcta a la base de datos")
+} catch (error) {
+    
+}
 
 const port = 3000
 
