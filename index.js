@@ -19,10 +19,10 @@ app.use(express.static('public'))
 
 // ? Conexion a la base de datos
 try {
-    await db.authenticate()
-    console.log("Conexion correcta a la base de datos")
+    await db.authenticate();
+    console.log("Conexión correcta a la base de datos");
 } catch (error) {
-    
+    console.error("Error en la conexión a la base de datos:", error);
 }
 
 const port = 3000

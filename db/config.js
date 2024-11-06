@@ -1,19 +1,18 @@
 import { Sequelize } from "sequelize";
 
-const db = new Sequelize('bienesraices_220772', 'JesuusArt', 'pass123', {
+const db = new Sequelize('bienesraices_220772', 'root', '1234', {
     host: "localhost",
-    port: 3307,
+    port: 3306,
     dialect: 'mysql',
     define: {
         timestamps: true
     },
-    port: {
+    pool: { 
         max: 5,
         min: 0,
         acquire: 30000,
         idle: 10000,
-    },
-    operatorsAliases: false
-})
+    }
+});
 
 export default db;
