@@ -2,30 +2,28 @@ extends ../layout/index
 
 block contenido
     div.py-10
-        h1.text-4xl.my-10.font-extrabold.text-center.text-orange-500 Bienes 
-            span.font-normal.text-black Raices
-        h2.text-center.text-2xl.font-extrabold=page
+        h1.text-4xl.my-10.font-extrabold.text-center.text-action Bienes 
+            span.font-normal.text-primaryText Raices
+        h2.text-center.text-2xl.font-extrabold= page
 
         .mt-8.mx-auto.max-w-lg
-            .bg-white.py-8.px-6.rounded-md.shadow-md
+            .bg-formBackground.py-8.px-6.rounded-md.shadow-md
                 form(action="").space-y-5
                     div.mb-5
-                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Ingresa tu nombre completo:
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu nombre completo:
                         input#nombre.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu nombre" type="text" name="nombre")
                     div.mb-5
-                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Ingresa tu email:
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu email:
                         input#email.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu email" type="email" name="email")
                     div.mb-5
-                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Ingresa tu contraseña:
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu contraseña:
                         input#password.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu contraseña" type="password" name="password")
                     div.mb-5
-                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Confirma tu contraseña:
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Confirma tu contraseña:
                         input#password2.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Confirma tu contraseña" type="password" name="password2")
 
-                    input(class="w-full bg-orange-600 text-white hover:bg-black font-bold py-3 cursor-pointer" type="submit" value="Crear cuenta")
+                    input(class="w-full bg-action text-white hover:bg-hoverAction font-bold py-3 cursor-pointer" type="submit" value="Crear cuenta")
 
                     .flex.items-center.justify-between
-                        a.text-sm.text-gray-400(href="/login" class="hover:text-orange-500") ¿Ya tienes una cuenta? Inicia sesión
-                        a.text-sm.text-gray-400(href="/passwordRecovery" class="hover:text-orange-500") ¿Olvidaste tu contraseña? Recupérala
-
-                    
+                        a.text-sm.text-secondaryText(href="/login" class="hover:text-action") ¿Ya tienes una cuenta? Inicia sesión
+                        a.text-sm.text-secondaryText(href="/passwordRecovery" class="hover:text-action") ¿Olvidaste tu contraseña? Recupérala
