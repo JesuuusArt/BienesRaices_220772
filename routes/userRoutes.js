@@ -1,5 +1,5 @@
 import express from 'express'
-import { formularioLogin, formularioRegister, formularioPasswordRecovery } from '../Controllers/userController.js'
+import { formularioLogin, formularioRegister, formularioPasswordRecovery, register } from '../Controllers/userController.js'
 
 const router = express.Router()
 
@@ -32,12 +32,15 @@ router.patch("/updatePassword/:email/:newPassword/:newPasswordConfirm", function
 
 // ? DELETE 
 router.delete("/deleteUser/:email", function(req, res){
-    res.send(`Se ha solicitado la elimnicacion del usuario con el correo: ${req.params.email}`)
+    res.send(`Se ha solicitado la eliminacion del usuario con el correo: ${req.params.email}`)
 })
 
 // ? Aqui se estan creando las rutas
 router.get("/login", formularioLogin) // ? middleware
 router.get("/register", formularioRegister)  
+
+router.post("/register", register)
+
 router.get("/passwordRecovery", formularioPasswordRecovery)
 
 export default router
