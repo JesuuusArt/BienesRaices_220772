@@ -3,16 +3,23 @@ import generalRoutes from './routes/generalRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import db from './db/config.js';
 
+// ? Crear la app
+
 const app = express();
 
 app.set('view engine', 'pug');
-app.set('views', './Views');  // Cambiado a minúsculas
+app.set('views', './Views');  
 
 app.use(express.static('public'));
-app.use(express.json());  // Habilitado para procesar JSON
-app.use(express.urlencoded({ extended: true }));  // Para datos de formularios
+app.use(express.json());  
+
+// ? Habilitar la lectura de los datos de un formulario
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("./public"))
+app.use('/auth', userRoutes)
+
 try {
     await db.authenticate();
     db.sync();

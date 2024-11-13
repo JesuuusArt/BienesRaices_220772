@@ -1,4 +1,5 @@
-import User from "../Models/users.js"
+import { check, validationResult } from "express-validator"
+import User from "../Models/Users.js"
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
