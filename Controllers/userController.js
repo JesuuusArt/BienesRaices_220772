@@ -52,8 +52,13 @@ const { nombre, email, password} = req.body
         })
     }
 
-    const user = await User.create(req.body);
-    res.json(user)
+    // ? Almacenar un usuario
+    await User.create({
+        nombre,
+        email,
+        password,
+        token: 123
+    })
 }
 
 const formularioPasswordRecovery = (req, res) => {

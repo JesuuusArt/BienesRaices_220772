@@ -601,6 +601,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(238 121 86 / var(--tw-bg-opacity));
 }
+.bg-error {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 82 82 / var(--tw-bg-opacity));
+}
 .bg-formBackground {
   --tw-bg-opacity: 1;
   background-color: rgb(250 245 240 / var(--tw-bg-opacity));
@@ -608,14 +612,6 @@ video {
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-.bg-error {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 82 82 / var(--tw-bg-opacity));
 }
 .p-2 {
   padding: 0.5rem;
