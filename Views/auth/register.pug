@@ -2,30 +2,52 @@ extends ../layout/index
 
 block contenido
     div.py-10
-        h1.text-4xl.my-10.font-extrabold.text-center.text-orange-500 Bienes 
-            span.font-normal.text-black Raices
-        h2.text-center.text-2xl.font-extrabold=page
+        h1.text-4xl.my-10.font-extrabold.text-center.text-action Bienes 
+            span.font-normal.text-primaryText Raices
+        h2.text-center.text-2xl.font-extrabold= page
+
+        if errores
+            div(class="max-w-md mx-auto my-10")
+                each error, i in errores
+                    p.bg-error.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold.fade-error(data-index=i)= error.msg
 
         .mt-8.mx-auto.max-w-lg
-            .bg-white.py-8.px-6.rounded-md.shadow-md
-                form(action="").space-y-5
+            .bg-formBackground.py-8.px-6.rounded-md.shadow-md
+                form.space-y-5(method="POST" action="/auth/register")
+                    input(type="hidden" name="_csrf" value= csrfToken)
                     div.mb-5
-                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Ingresa tu nombre completo:
-                        input#nombre.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu nombre" type="text" name="nombre")
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu nombre completo:
+                        input#nombre.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu nombre" type="text" name="nombre" value= user ? user.nombre : '')
                     div.mb-5
-                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Ingresa tu email:
-                        input#email.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu email" type="email" name="email")
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu email:
+                        input#email.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu email" type="email" name="email" value= user ? user.email : '')
                     div.mb-5
-                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Ingresa tu contraseña:
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu contraseña:
                         input#password.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu contraseña" type="password" name="password")
                     div.mb-5
-                        label.block.text-sm.uppercase.text-gray-600.mb-2.font-bold Confirma tu contraseña:
-                        input#password2.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Confirma tu contraseña" type="password" name="password2")
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Confirma tu contraseña:
+                        input#password2.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Confirma tu contraseña" type="password" name="confirmPassword")
 
-                    input(class="w-full bg-orange-600 text-white hover:bg-black font-bold py-3 cursor-pointer" type="submit" value="Crear cuenta")
+                    input(class="w-full bg-action text-white hover:bg-hoverAction font-bold py-3 cursor-pointer" type="submit" value="Crear cuenta")
 
                     .flex.items-center.justify-between
-                        a.text-sm.text-gray-400(href="/login" class="hover:text-orange-500") ¿Ya tienes una cuenta? Inicia sesión
-                        a.text-sm.text-gray-400(href="/passwordRecovery" class="hover:text-orange-500") ¿Olvidaste tu contraseña? Recupérala
+                        a.text-sm.text-secondaryText(href="/auth/login" class="hover:text-action") ¿Ya tienes una cuenta? Inicia sesión
+                        a.text-sm.text-secondaryText(href="/auth/passwordRecovery" class="hover:text-action") ¿Olvidaste tu contraseña? Recupérala
 
-                    
+    if errores
+        style.
+            .fade-error {
+                transition: opacity 1s ease-in-out;
+            }
+        script.
+            setTimeout(function() {
+                const errorMessages = document.querySelectorAll('.fade-error');
+                errorMessages.forEach((message, index) => {
+                    setTimeout(() => {
+                        message.style.opacity = '0'; 
+                        setTimeout(() => {
+                            message.style.display = 'none'; 
+                        }, 1000); 
+                    }, index * 2000); 
+                });
+            }, 1500); 

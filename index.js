@@ -1,26 +1,46 @@
+import express from 'express'
+import csurf from 'csurf'
+import cookieParser from 'cookie-parser'
+
 import generalRoutes from './routes/generalRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import db from './db/config.js'
+import dotenv from 'dotenv'
 
-// ? Ejemplo de activacion de HOT RELOAD
-//console.log("Hola desde NodeJS, esto esta en hot reload")
+dotenv.config({ path: '.env' })
 
-//const express = require(`express`) // ? Usando CommonJS
-// ? Importar la libreria para crear un servidor web - CommonJS / ECMA Script 6
-// ? Instanciar nuestra aplicacion web
-import express from 'express'
-
+// ? Crear la app
 const app = express()
+
 app.set('view engine', 'pug')
-app.set('Views', '/.Views')
+app.set('views', './Views')
 
-// ? Carpeta publica de recursos estaticos (assets)
 app.use(express.static('public'))
+app.use(express.json()); 
 
-const port = 3000
+// ? Habilitar la lectura de los datos de un formulario
+app.use(express.urlencoded({ extended: true }))
 
+// ? Habilitar cookie Parser
+app.use(cookieParser())
+
+// ? Habilitar CSRF
+app.use(csurf({ cookie: true }))
+
+app.use(express.static('./public'))
+
+try {
+    await db.authenticate()
+    db.sync()
+    console.log('Conexión correcta a la base de datos')
+} catch (error) {
+    console.error('Error en la conexión a la base de datos:', error)
+}
+
+app.use('/', generalRoutes)
+app.use('/auth', userRoutes)
+
+const port = process.env.PORT
 app.listen(port, () =>
-    console.log(`La aplicacion ha iniciado en el puerto: ${port}`))
-
-// ? Routing - Enrutacion para peticiones
-app.use('/', generalRoutes) // ? Importando de las rutas del archivo generalRoutes.js
-app.use('/', userRoutes) // ? Importando de las rutas del archivo userRoutes.js
+    console.log(`La aplicación ha iniciado en el puerto: ${port}`)
+)

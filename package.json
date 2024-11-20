@@ -7,7 +7,7 @@
   "scripts": {
     "saluda": "node saluda.js",
     "server": "nodemon index.js",
-    "css" : "postcss public/css/tailwind.css -o public/css/app.css --watch"
+    "css": "postcss public/css/tailwind.css -o public/css/app.css --watch"
   },
   "repository": {
     "type": "git",
@@ -32,8 +32,16 @@
   },
   "homepage": "https://github.com/JesuuusArt/BienesRaices_220772#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "pug": "^3.0.3"
+    "express-validator": "^7.2.0",
+    "mysql2": "^3.11.4",
+    "nodemailer": "^6.9.16",
+    "pug": "^3.0.3",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
