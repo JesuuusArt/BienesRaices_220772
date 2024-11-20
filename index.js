@@ -2,6 +2,9 @@ import express from 'express';
 import generalRoutes from './routes/generalRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import db from './db/config.js';
+import dotenv from 'dotenv'
+
+dotenv.config({path: '.env'})
 
 // ? Crear la app
 
@@ -28,11 +31,10 @@ try {
     console.error("Error en la conexión a la base de datos:", error);
 }
 
-const port = 3000;
-
 app.use('/', generalRoutes);
-app.use('/', userRoutes);
+app.use('/auth', userRoutes);
 
+const port = process.env.PORT;
 app.listen(port, () =>
     console.log(`La aplicación ha iniciado en el puerto: ${port}`)
 );

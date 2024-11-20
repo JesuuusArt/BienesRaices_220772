@@ -1,5 +1,5 @@
 import express from 'express'
-import { formularioLogin, formularioRegister, formularioPasswordRecovery, register } from '../Controllers/userController.js'
+import { formularioLogin, formularioRegister, formularioPasswordRecovery, register, confirmAccount } from '../Controllers/userController.js'
 
 const router = express.Router()
 
@@ -40,6 +40,8 @@ router.get("/login", formularioLogin) // ? middleware
 router.get("/register", formularioRegister)  
 
 router.post("/register", register)
+
+router.get("/confirmAccount/:token", confirmAccount)
 
 router.get("/passwordRecovery", formularioPasswordRecovery)
 

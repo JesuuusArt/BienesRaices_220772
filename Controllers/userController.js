@@ -1,6 +1,7 @@
 import { check, validationResult } from "express-validator"
 import User from "../Models/Users.js"
-import { where } from "sequelize"
+import { generateId } from "../helpers/tokens.js"
+import { registerEmail} from '../helpers/emails.js'
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
@@ -53,12 +54,55 @@ const { nombre, email, password} = req.body
     }
 
     // ? Almacenar un usuario
-    await User.create({
+    const user = await User.create({
         nombre,
         email,
         password,
-        token: 123
+        token: generateId()
     })
+
+    // ? Envia email de confirmacion
+    registerEmail({
+        nombre: user.nombre,
+        email: user.email,
+        token: user.token
+    })
+
+
+
+    // ? Mostrar mensaje de confirmacion
+    res.render('templates/mesage', {
+        page: 'Cuenta Creada Correctamente', 
+        mesage: 'Hemos enviado un correo de confirmacion, presiona el enlace'
+    })
+}
+
+// ? Funcion que comprueba una cuenta
+const confirmAccount = async (req, res) => {
+
+    const { token } = req.params
+
+    // ? Verificar si el token es valido
+    const confirmUser = await User.findOne({ where : {token}})
+    
+    if(!confirmUser) {
+        return res.render('auth/confirmAccount', {
+            page: 'Error al confirmar tu Cuenta',
+            mesage: 'Hubo un error al confirmar tu cuenta, intenta de nuevo',
+            error: true,
+        })
+    }
+
+    // ? Confirmar la cuenta
+    confirmUser.token = null
+    confirmUser.confirmAccount = true
+    await confirmUser.save()
+
+    res.render('auth/confirmAccount', {
+        page: 'Cuenta Confirmada',
+        mesage: 'La cuenta se confirmo correctamente',
+    })
+
 }
 
 const formularioPasswordRecovery = (req, res) => {
@@ -68,5 +112,5 @@ const formularioPasswordRecovery = (req, res) => {
 }
 
 export {
-    formularioLogin, formularioRegister, formularioPasswordRecovery, register
+    formularioLogin, formularioRegister, formularioPasswordRecovery, register, confirmAccount
 }
