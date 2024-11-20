@@ -8,8 +8,8 @@ block contenido
 
         if errores
             div(class="max-w-md mx-auto my-10")
-                each error in errores
-                    p.bg-error.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold.fade-error= error.msg
+                each error, i in errores
+                    p.bg-error.text-white.uppercase.text-xs.text-center.p-2.mb-1.font-bold.fade-error(data-index=i)= error.msg
 
         .mt-8.mx-auto.max-w-lg
             .bg-formBackground.py-8.px-6.rounded-md.shadow-md
@@ -42,10 +42,12 @@ block contenido
         script.
             setTimeout(function() {
                 const errorMessages = document.querySelectorAll('.fade-error');
-                errorMessages.forEach(function(message) {
-                    message.style.opacity = '0'; 
-                    setTimeout(function() {
-                        message.style.display = 'none'; 
-                    }, 1000); 
+                errorMessages.forEach((message, index) => {
+                    setTimeout(() => {
+                        message.style.opacity = '0'; 
+                        setTimeout(() => {
+                            message.style.display = 'none'; 
+                        }, 1000); 
+                    }, index * 2000); 
                 });
-            }, 3000);
+            }, 1500); 

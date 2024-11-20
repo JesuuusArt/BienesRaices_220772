@@ -22,3 +22,21 @@ block contenido
                     .flex.items-center.justify-between
                         a.text-sm.text-secondaryText(href="/auth/register" class="hover:text-action") ¿No tienes una cuenta? Crea una
                         a.text-sm.text-secondaryText(href="/auth/passwordRecovery" class="hover:text-action") ¿Olvidaste tu contraseña? Recupérala
+
+    if errores
+        style.
+            .fade-error {
+                transition: opacity 1s ease-in-out;
+            }
+        script.
+            setTimeout(function() {
+                const errorMessages = document.querySelectorAll('.fade-error');
+                errorMessages.forEach((message, index) => {
+                    setTimeout(() => {
+                        message.style.opacity = '0'; 
+                        setTimeout(() => {
+                            message.style.display = 'none'; 
+                        }, 1000); 
+                    }, index * 2000); 
+                });
+            }, 1500); 
