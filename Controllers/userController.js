@@ -20,9 +20,10 @@ const formularioRegister = (req, res) => {
 const register = async (req, res) => { 
     await check('nombre').notEmpty().withMessage('El nombre no puede ir vacio').run(req)
     await check('email').isEmail().withMessage('El correo no puede ir vacio').run(req)
+    await check('birthDate').isISO8601().withMessage('La fecha de nacimiento debe ser válida').run(req) 
     await check('password').isLength({ min: 8 }).withMessage('La contraseña debe ser de al menos 8 caracteres').run(req)
     await check('confirmPassword').custom((value, { req }) => value === req.body.password).withMessage('Las contraseñas no coinciden').run(req)
-    await check('birthDate').isISO8601().withMessage('La fecha de nacimiento debe ser válida').run(req) 
+
 
     let result = validationResult(req)
 
