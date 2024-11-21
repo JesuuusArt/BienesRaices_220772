@@ -10,12 +10,11 @@ block contenido
 
     div(class="bg-formBackground shadow-lg py-8 px-6 rounded-lg max-w-md mx-auto mt-6 border border-gray-200")
         if mesage
-
             p(class= error ? 'bg-error' : 'bg-success').py-3.px-4.rounded-md.w-full.font-bold.text-center.text-white.uppercase= mesage
         if !error 
             a(
                 href="/auth/login" 
-                class="w-full inline-block bg-action text-white hover:bg-hoverAction transition duration-300 ease-in-out font-bold py-3 text-center rounded-lg mt-4 items-center justify-center"
+                class="w-full inline-block bg-action text-white hover:bg-hoverAction duration-300 ease-in-out font-bold py-3 text-center rounded-lg mt-4 items-center justify-center transform transition-all hover:scale-105"
             )
                 span.mr-2.text-lg &#x1F511; 
                 | Ya puedes Iniciar Sesión

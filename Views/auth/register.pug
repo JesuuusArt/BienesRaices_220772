@@ -22,21 +22,25 @@ block contenido
                         label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu email:
                         input#email.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu email" type="email" name="email" value= user ? user.email : '')
                     div.mb-5
+                        label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu fecha de nacimiento:
+                        input#birthDate.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(type="date" name="birthDate" value= user ? user.birthDate : '')
+                    div.mb-5
                         label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Ingresa tu contraseña:
                         input#password.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Ingresa tu contraseña" type="password" name="password")
                     div.mb-5
                         label.block.text-sm.uppercase.text-secondaryText.mb-2.font-bold Confirma tu contraseña:
                         input#password2.w-full.px-4.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Confirma tu contraseña" type="password" name="confirmPassword")
-
-                    input(class="w-full bg-action text-white hover:bg-hoverAction font-bold py-3 cursor-pointer" type="submit" value="Crear cuenta")
+                    
+                    input(class="w-full bg-action text-white hover:bg-hoverAction font-bold py-3 cursor-pointer transform transition-all duration-300 hover:scale-105" type="submit" value="Crear cuenta")
 
                     .flex.items-center.justify-between
-                        a.text-sm.text-secondaryText(href="/auth/login" class="hover:text-action") ¿Ya tienes una cuenta? Inicia sesión
-                        a.text-sm.text-secondaryText(href="/auth/passwordRecovery" class="hover:text-action") ¿Olvidaste tu contraseña? Recupérala
+                        a.text-sm.text-secondaryText(href="/auth/login" class="hover:text-action hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out") ¿Ya tienes una cuenta? Inicia sesión
+                        a.text-sm.text-secondaryText(href="/auth/passwordRecovery" class="hover:text-action hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out") ¿Olvidaste tu contraseña? Recupérala
 
     if errores
         style.
             .fade-error {
+                opacity: 0;
                 transition: opacity 1s ease-in-out;
             }
         script.
@@ -44,10 +48,8 @@ block contenido
                 const errorMessages = document.querySelectorAll('.fade-error');
                 errorMessages.forEach((message, index) => {
                     setTimeout(() => {
-                        message.style.opacity = '0'; 
-                        setTimeout(() => {
-                            message.style.display = 'none'; 
-                        }, 1000); 
-                    }, index * 2000); 
+                        message.classList.remove('opacity-0');
+                        message.classList.add('opacity-100');
+                    }, index * 500);
                 });
-            }, 1500); 
+            }, 1500);

@@ -1,8 +1,8 @@
-import { DataTypes } from "sequelize";
-import bcrypt from 'bcrypt'
-import db from "../db/config.js";
+import { DataTypes } from 'sequelize';
+import bcrypt from 'bcrypt';
+import db from '../db/config.js';
 
-const User =  db.define('Users', {
+const User = db.define('Users', {
     nombre: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -15,15 +15,20 @@ const User =  db.define('Users', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    birthDate: { 
+        type: DataTypes.DATE,
+        allowNull: true, 
+    },
     token: DataTypes.STRING,
     confirm: DataTypes.BOOLEAN,
 }, {
     hooks: {
-        beforeCreate: async function(user) {
-            const salt = await bcrypt.genSalt(10)
-            user.password = await bcrypt.hash(user.password, salt)
-        }
+        beforeCreate: async (user) => {
+            // Encriptar la contraseña antes de crear el usuario
+            const salt = await bcrypt.genSalt(10);
+            user.password = await bcrypt.hash(user.password, salt);
+        },
     }
-})
+});
 
-export default User
+export default User;
