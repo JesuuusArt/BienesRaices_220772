@@ -549,6 +549,9 @@ video {
 .mb-5 {
   margin-bottom: 1.25rem;
 }
+.mr-2 {
+  margin-right: 0.5rem;
+}
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -585,11 +588,17 @@ video {
 .max-w-md {
   max-width: 28rem;
 }
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
 .cursor-pointer {
   cursor: pointer;
 }
 .items-center {
   align-items: center;
+}
+.justify-center {
+  justify-content: center;
 }
 .justify-between {
   justify-content: space-between;
@@ -620,6 +629,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(238 121 86 / var(--tw-bg-opacity));
 }
+.bg-background {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
 .bg-error {
   --tw-bg-opacity: 1;
   background-color: rgb(255 82 82 / var(--tw-bg-opacity));
@@ -635,10 +648,6 @@ video {
 .bg-success {
   --tw-bg-opacity: 1;
   background-color: rgb(76 175 80 / var(--tw-bg-opacity));
-}
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 .p-2 {
   padding: 0.5rem;
@@ -681,6 +690,10 @@ video {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 .text-sm {
   font-size: 0.875rem;
@@ -747,11 +760,21 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
 .duration-300 {
   transition-duration: 300ms;
 }
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover\:scale-105:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .hover\:bg-hoverAction:hover {
   --tw-bg-opacity: 1;
@@ -760,4 +783,10 @@ video {
 .hover\:text-action:hover {
   --tw-text-opacity: 1;
   color: rgb(238 121 86 / var(--tw-text-opacity));
+}
+.hover\:underline:hover {
+  text-decoration-line: underline;
+}
+.hover\:underline-offset-4:hover {
+  text-underline-offset: 4px;
 }

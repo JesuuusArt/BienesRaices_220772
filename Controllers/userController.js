@@ -18,15 +18,14 @@ const formularioRegister = (req, res) => {
 }
 
 const register = async (req, res) => { 
-
-    await check('nombre').notEmpty().withMessage('El nombre no puede ir vacio').run(req)
-    await check('email').isEmail().withMessage('El correo no puede ir vacio').run(req)
-    await check('password').isLength({ min: 8 }).withMessage('La contraseña debe ser de al menos 8 caracteres').run(req)
-    await check('confirmPassword').custom((value, { req }) => value === req.body.password).withMessage('Las contraseñas no coinciden').run(req)
+    await check('nombre').notEmpty().withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> El nombre no puede ir vacío').run(req)
+    await check('email').isEmail().withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> El correo no puede ir vacío').run(req)
+    await check('birthDate').isISO8601().withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> La fecha de nacimiento debe ser válida').run(req)
+    await check('password').isLength({ min: 8 }).withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> La contraseña debe ser de al menos 8 caracteres').run(req)
+    await check('confirmPassword').custom((value, { req }) => value === req.body.password).withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> Las contraseñas no coinciden').run(req)
 
     let result = validationResult(req)
 
-    // ? Verificar que el resultado este vacio
     if(!result.isEmpty()) {
         return res.render('auth/register', {
             page: 'Crear Cuenta',
@@ -35,51 +34,51 @@ const register = async (req, res) => {
             user: {
                 nombre: req.body.nombre,
                 email: req.body.email,
+                birthDate: req.body.birthDate
             }
         })
     }
 
-// ? Extraer datos
-const { nombre, email, password} = req.body
+    const { nombre, email, password, birthDate } = req.body
 
-    // ? Verificar que el usuario no este duplicado
-    const userExist = await User.findOne({ where: {email : email }})
-    
+    // Verificar que el usuario no esté duplicado
+    const userExist = await User.findOne({ where: { email: email }})
     if(userExist) {
         return res.render('auth/register', {
             page: 'Crear Cuenta',
             csrfToken: req.csrfToken(),
-            errores: [{msg: 'El usuario ya existe'}],
+            errores: [{ msg: 'El usuario ya existe' }],
             user: {
-                nombre: req.body.nombre,
-                email: req.body.email
+                nombre,
+                email, 
+                birthDate 
             }
         })
     }
 
-    // ? Almacenar un usuario
+    // Crear el usuario en la base de datos
     const user = await User.create({
         nombre,
         email,
         password,
+        birthDate,
         token: generateId()
     })
 
-    // ? Envia email de confirmacion
+    // Enviar email de confirmación
     registerEmail({
         nombre: user.nombre,
         email: user.email,
         token: user.token
     })
 
-
-
-    // ? Mostrar mensaje de confirmacion
+    // Mostrar mensaje de confirmación
     res.render('templates/mesage', {
         page: 'Cuenta Creada Correctamente', 
-        mesage: 'Hemos enviado un correo de confirmacion, presiona el enlace'
+        mesage: 'Se ha enviado un correo de confirmación a su dirección. Por favor, revise su bandeja de entrada para completar el proceso.'
     })
 }
+
 
 // ? Funcion que comprueba una cuenta
 const confirmAccount = async (req, res) => {

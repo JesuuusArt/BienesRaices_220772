@@ -29,21 +29,25 @@ const registerEmail = async (datos) => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirma tu Cuenta</title>
+    <title>Confirma tu Cuenta en Bienes Raíces</title>
 </head>
 <body style="background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; position: relative;">
     <div style="max-width: 600px; margin: 0 auto; background-color: #faf5f0; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative;">
 
         <div style="position: absolute; top: 10px; right: 10px;">
-            <img src="logo.png" alt="Logo Bienes Raíces" style="width: 50px; height: auto; border-radius: 5px;">
+            <img src="cid:logoBR" alt="Logo Bienes Raíces" style="width: 50px; height: auto; border-radius: 5px;">
         </div>
 
         <h1 style="color: #ee7956; text-align: center; font-size: 24px; font-weight: bold; margin: 0 0 20px;">
-            Bienvenido a Bienes Raíces
+            ¡Bienvenido a Bienes Raíces!
         </h1>
 
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="cid:casa" alt="Bienvenido" style="max-width: 100px; height: auto;">
+        </div>
+
         <p style="color: #636363; margin: 10px 0;">
-            Hola <strong>${nombre}</strong>,
+            ¡Hola, <strong>${nombre}</strong>! Qué gusto verte por aquí.
         </p>
 
         <p style="color: #636363; margin: 10px 0;">
@@ -58,23 +62,48 @@ const registerEmail = async (datos) => {
         </div>
 
         <p style="color: #636363; margin: 10px 0;">
-            Si no creaste esta cuenta, puedes ignorar este mensaje.
+            Una vez confirmes tu cuenta, podrás acceder a todos nuestros servicios y explorar las mejores opciones de bienes raíces. ¡Estamos emocionados de tenerte con nosotros!
+        </p>
+
+        <p style="color: #636363; margin: 10px 0;">
+            Si no creaste esta cuenta, puedes ignorar este mensaje. ¡No te preocupes, nada sucederá!
         </p>
 
         <div style="margin-top: 20px; text-align: right; font-size: 14px; font-style: italic; color: #636363;">
             <p>Atentamente,</p>
-            <img src="firma.png" alt="Firma del equipo de Bienes Raíces" style="width: 150px; height: auto; margin-top: 10px;">
+            <img src="cid:firma" alt="Firma del equipo de Bienes Raíces" style="width: 150px; height: auto; margin-top: 10px;">
             <p><strong>El equipo de Bienes Raíces</strong></p>
         </div>
 
         <footer style="text-align: center; margin-top: 20px; font-size: 12px; color: #636363;">
-            &copy; 2024 BienesRaices.com - Todos los derechos reservados
+            &copy; 2024 BienesRaices.com - Todos los derechos reservados. 
+            <br>
+            <a href="#politicas" style="color: #636363;">Políticas de Privacidad</a> | <a href="#terminos" style="color: #636363;">Términos de Servicio</a>
         </footer>
 
     </div>
 </body>
 </html>
-            `
+
+    `,
+    attachments: [
+        {
+            filename: 'logo_BR.png', 
+            path: './public/assets/logo_BR.png', 
+            cid: 'logoBR' 
+        },
+        {
+            filename: 'firma.png', 
+            path: './public/assets/firma.png', 
+            cid: 'firma'
+        },
+        {
+            filename: 'casa.png', 
+            path: './public/assets/casa.png', 
+            cid: 'casa'
+        }
+    ]
+
     })
 }
 
