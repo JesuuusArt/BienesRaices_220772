@@ -77,7 +77,7 @@ const { nombre, email, password} = req.body
     // ? Mostrar mensaje de confirmacion
     res.render('templates/mesage', {
         page: 'Cuenta Creada Correctamente', 
-        mesage: 'Hemos enviado un correo de confirmacion, presiona el enlace'
+        mesage: 'Se ha enviado un correo de confirmación a su dirección. Por favor, revise su bandeja de entrada para completar el proceso.'
     })
 }
 
