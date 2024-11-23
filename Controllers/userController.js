@@ -98,7 +98,7 @@ const confirmAccount = async (req, res) => {
 
     // ? Confirmar la cuenta
     confirmUser.token = null
-    confirmUser.confirmAccount = true
+    confirmUser.confirm = 1
     await confirmUser.save()
 
     res.render('auth/confirmAccount', {
