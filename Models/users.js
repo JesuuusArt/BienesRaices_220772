@@ -24,7 +24,6 @@ const User = db.define('Users', {
 }, {
     hooks: {
         beforeCreate: async (user) => {
-            // Encriptar la contraseña antes de crear el usuario
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(user.password, salt);
         },
