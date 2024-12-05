@@ -145,6 +145,7 @@ const resetPassword = async (req, res) => {
     }
 
     // Generar token de recuperación
+    user.password = ""
     user.token = generateId();
     await user.save();
 
