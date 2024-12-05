@@ -45,7 +45,7 @@ const register = async (req, res) => {
         return res.render('auth/register', {
             page: 'Crear Cuenta',
             csrfToken: req.csrfToken(),
-            errores: [{ mesage: 'El usuario ya existe' }],
+            errores: [{ msg: 'El usuario ya existe' }],
             user: { nombre, email, birthDate }
         });
     }
@@ -129,7 +129,7 @@ const resetPassword = async (req, res) => {
         return res.render('auth/passwordRecovery', {
             page: 'Recupera tu contraseña',
             csrfToken: req.csrfToken(),
-            errores: [{ mesage: 'No existe una cuenta asociada a ese correo' }],
+            errores: [{ msg: 'No existe una cuenta asociada a ese correo' }],
             user: { email }
         });
     }
@@ -139,7 +139,7 @@ const resetPassword = async (req, res) => {
         return res.render('auth/passwordRecovery', {
             page: 'Cuenta no confirmada',
             csrfToken: req.csrfToken(),
-            errores: [{ mesage: 'La cuenta aún no ha sido confirmada. Por favor, revisa tu correo para confirmar tu cuenta.' }],
+            errores: [{ msg: 'La cuenta aún no ha sido confirmada. Por favor, revisa tu correo para confirmar tu cuenta.' }],
             user: { email }
         });
     }
@@ -207,7 +207,7 @@ const newPassword = async (req, res) => {
         if (!userTokenOwner) {
             return res.render('auth/resetPassword', {
                 page: 'Error al actualizar la contraseña',
-                errores: [{ mesage: 'Usuario no encontrado o token inválido.' }],
+                errores: [{ msg: 'Usuario no encontrado o token inválido.' }],
                 csrfToken: req.csrfToken(),
                 token: token 
             });
@@ -228,7 +228,7 @@ const newPassword = async (req, res) => {
         console.error('Error updating password:', error);
         res.status(500).render('auth/resetpassword', {
             page: 'Error al actualizar la contraseña',
-            errores: [{ mesage: 'Ocurrió un error inesperado. Por favor intenta nuevamente.' }],
+            errores: [{ msg: 'Ocurrió un error inesperado. Por favor intenta nuevamente.' }],
             csrfToken: req.csrfToken(),
             token: token 
         });
