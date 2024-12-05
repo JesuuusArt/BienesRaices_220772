@@ -165,7 +165,24 @@ const passwordRecoveryEmail= async (datos) => {
     </div>
 </body>
 </html>
-            `
+    `,
+    attachments: [
+        {
+            filename: 'logo_BR.png', 
+            path: './public/assets/logo_BR.png', 
+            cid: 'logoBR' 
+        },
+        {
+            filename: 'firma.png', 
+            path: './public/assets/firma.png', 
+            cid: 'firma'
+        },
+        {
+            filename: 'casa.png', 
+            path: './public/assets/casa.png', 
+            cid: 'casa'
+        }
+    ]
     })
 }
 

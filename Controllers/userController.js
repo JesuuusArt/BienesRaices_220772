@@ -121,35 +121,38 @@ const resetPassword = async (req, res) => {
     await check('email').notEmpty().withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;"/> El correo no debe estar vacio').isEmail().withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;"/> El correo no tiene el formato adecuado: example@dominio.extension').run(req)
     
     let result = validationResult(req)
+
     // ? Verificar que el resultado este vacio
     if(!result.isEmpty()) {
         return res.render('auth/passwordRecovery', {
-            page: 'Recupera tu contraseña',
+            page: 'Error al intentar resetear la contraseña',
             csrfToken: req.csrfToken(),
             errores: result.array(),
         })
     }
 
     // ? Buscar el usuario
-    const { email } = req.body
+    const { email : email } = req.body
+
     const user = await User.findOne({ where: {email, confirm:1} })
 
     if(!user) {
         return res.render('auth/passwordRecovery', {
-            page: 'Recupera tu contraseña',
+            page: 'Error, no existe una cuenta autentificada asociada al correo electrónico ingresado',
             csrfToken: req.csrfToken(),
-            errores: [{msg: 'El email no existe'}],
+            errores: [{msg: 'Por favor revisa los datos e intentalo de nuevo'}],
+            user : { email : email}
         })
     }
-
-    // ? Generar un Token y enviar el email
-    user.token = generateId()
-    await user.save()
+    
+    user.password = "";
+    user.token = generateId();
+    user.save();
 
     // ? Enviar el email
     passwordRecoveryEmail({
+        name: user.name,
         email: user.email,
-        nombre: user.nombre,
         token: user.token
     })
 
@@ -158,58 +161,60 @@ const resetPassword = async (req, res) => {
     // ? Mostrar mensaje de confirmacion
     res.render('templates/mesage', {
         page: 'Recupera tu Contraseña', 
-        mesage: 'Hemos enviado un correo con las instrucciones para recuperar tu contraseña, presiona el enlace'
+        mesage: 'Hemos enviado un correo a: <Agregar email del usuario>  para la la actualización de tu contraseña'
     })
 }
 
-const checkToken = async (req, res) => {
-    const { token } = req.params
-    const user = await User.findOne({ where: {token}})
-    if(!user){
-        return res.render('auth/confirmAccount', {
-            page: 'Restablece tu Contraseña',
-            mesage: 'Hubo un error al validar tu informacion, intenta de nuevo',
-            error: true,
+const checkToken = async(req, res)=>{
+
+    const {token} = req.params;
+    const userTokenOwner = await User.findOne({where :{token}})
+
+    if(!userTokenOwner) { 
+        res.render('templates/mesage', {
+            csrfToken: req.csrfToken(),
+            page: 'Error',
+            msg: 'El token ha expirado o no existe.'
         })
     }
-    // ? Mostrar formulario para modificar la contraseña
+
     res.render('auth/resetPassword', {
-        page: 'Recupera tu Contraseña',
         csrfToken: req.csrfToken(),
+        page: 'Restablece tu password',
+        msg: 'Por favor ingresa tu nueva contraseña'
     })
 }
+
 const newPassword = async (req, res) => {
     // ? Validar contraseña
-    await check('newPassword').isLength({ min: 8 }).withMessage('La contraseña debe ser de al menos 8 caracteres').run(req);
+    await check('password').notEmpty().withMessage('El campo contraseña es obligatorio').isLength({ min: 8 }).withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> La contraseña debe ser de al menos 8 caracteres').run(req)
+    await check('confirmPassword').custom((value, { req }) => value === req.body.password).withMessage('<img src="/assets/error.png" alt="Error" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px; display: inline-block;" /> Las contraseñas no coinciden').run(req)
+
     let result = validationResult(req);
+
     // ? Verificar que el resultado esté vacío
     if(!result.isEmpty()) {
         return res.render('auth/resetPassword', {  
-            page: 'Recupera tu contraseña',
+            page: 'Error al intentar crear la Cuenta de Usuario',
             csrfToken: req.csrfToken(),
             errores: result.array(),
+            token: req.body.token
         });
     }
-    const { token } = req.params;
-    const { newPassword } = req.body;
-    // ? Identificar quien hace el cambio
-    const user = await User.findOne({ where: {token}});
-    if(!user) {
-        return res.render('auth/resetPassword', {  
-            page: 'Recupera tu Contraseña',
-            mesage: 'Hubo un error al validar tu información, intenta de nuevo',
-            error: true,
-        });
-    }
-    // ? Hashear nueva contraseña
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(newPassword, salt);
-    user.token = null;
-    await user.save();
-    res.render('auth/confirmAccount', {
-        page: 'Contraseña Recuperada',
-        mesage: 'La contraseña se recuperó correctamente'
-    });
+
+    // ? Actualizar en BD el pass 
+
+    const userTokenOwner = await User.findOne({where: {token}}) 
+    userTokenOwner.password = req.body.password;
+    userTokenOwner.token = null;
+    userTokenOwner.save();  // ? update tb_users set password=new_pasword where token=token;
+
+    //Renderizar la respuesta
+    res.render('auth/accountConfirmed', {
+        page: 'Excelente..!',
+        msg: 'Tu contraseña ha sido confirmada de manera exitosa.',
+        error: false
+    })  
 };
 
 export {
