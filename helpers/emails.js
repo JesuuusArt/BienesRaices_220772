@@ -134,7 +134,7 @@ const passwordRecoveryEmail= async (datos) => {
 <body style="background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 20px; position: relative;">
     <div style="max-width: 600px; margin: 0 auto; background-color: #faf5f0; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); position: relative;">
         <div style="position: absolute; top: 10px; right: 10px;">
-            <img src="logo.png" alt="Logo Bienes Raíces" style="width: 50px; height: auto; border-radius: 5px;">
+            <img src="cid:logoBR" alt="Logo Bienes Raíces" style="width: 50px; height: auto; border-radius: 5px;">
         </div>
         <h1 style="color: #ee7956; text-align: center; font-size: 24px; font-weight: bold; margin: 0 0 20px;">
             Bienvenido a Bienes Raíces
@@ -156,7 +156,7 @@ const passwordRecoveryEmail= async (datos) => {
         </p>
         <div style="margin-top: 20px; text-align: right; font-size: 14px; font-style: italic; color: #636363;">
             <p>Atentamente,</p>
-            <img src="firma.png" alt="Firma del equipo de Bienes Raíces" style="width: 150px; height: auto; margin-top: 10px;">
+            <img src="cid:firma" alt="Firma del equipo de Bienes Raíces" style="width: 150px; height: auto; margin-top: 10px;">
             <p><strong>El equipo de Bienes Raíces</strong></p>
         </div>
         <footer style="text-align: center; margin-top: 20px; font-size: 12px; color: #636363;">
