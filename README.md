@@ -13,7 +13,8 @@ Para poder demostrar y aprender la creacion y consumo de Interfaces de Programac
 |10.|23/10/2024|Operaciones Basicas de un API a traves de los verbos HTTP|12|✅Finalizada|
 |11.|05/11/2024|Implementacion de las pantallas de registro, logeo y recuperacion de contraseña|13|✅Finalizada|
 |12.|20/11/2024|Integración de Funcionalidad de Creación de Cuentas de Usuario|30|✅Finalizada|
-|13.|23/11/2024|Examen Practico - Unidad 2|:)|✅Finalizada|
+|.|23/11/2024|Examen Practico - Unidad 2|:)|✅Finalizada|
+|13.|05/12/2024|Implementación de la funcionalidad de  la recuperación de la contraseña|20|✅Finalizada|
 
 
 ### Tech Stack
