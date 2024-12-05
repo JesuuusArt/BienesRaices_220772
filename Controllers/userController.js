@@ -1,5 +1,4 @@
 import { check, validationResult } from "express-validator";
-import bcrypt from 'bcrypt';
 import User from "../Models/Users.js";
 import { generateId } from "../helpers/tokens.js";
 import { registerEmail, passwordRecoveryEmail } from '../helpers/emails.js';
