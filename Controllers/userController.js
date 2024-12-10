@@ -1,11 +1,12 @@
 import { check, validationResult } from "express-validator";
 import User from "../Models/Users.js";
-import { generateId } from "../helpers/tokens.js";
+import {generateToken, generateId } from "../helpers/tokens.js";
 import { registerEmail, passwordRecoveryEmail } from '../helpers/emails.js';
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
-        page: 'Inicia Sesión'
+        page: 'Inicia Sesión',
+        csrfToken: req.csrfToken()
     });
 };
 
@@ -169,7 +170,7 @@ const checkToken = async (req, res) => {
     const userTokenOwner = await User.findOne({where :{token}})
 
     if(!userTokenOwner)
-        { 
+        {
             res.render('templates/message', {
                 csrfToken: req.csrfToken(),
                 page: 'Error al intentar cambiar la contraseña',
@@ -236,6 +237,44 @@ const newPassword = async (req, res) => {
     }
 }
 
+const userAuthentication = async(req, res) => {
+        const {email,password} = req.body
+
+        await check('email').notEmpty().withMessage('El email es un campo obligatorio!').isEmail().withMessage('Formato incorrecto: example@example.com').run(req)
+        await check('password').isLength({min: 8}).withMessage('La contraseña debe ser de al menos 8 caracteres').run(req)
+        let result = validationResult(req)
+
+        if (!result.isEmpty()){
+            return res.render("auth/login",{
+                page : "Iniciar Sesion",
+                errores: result.array(),
+                csrfToken: req.csrfToken(),
+                user: req.body
+            })
+        }
+
+        const user = await User.findOne({ where: {email}})
+
+        if(!user){
+            return res.render('auth/login'), {
+                page: "Iniciar Sesion",
+                csrfToken: req.csrfToken(),
+                errores: result.array(),
+                user: req.body
+            }
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password)
+        if(!isMatch){
+            return res.render("auth/login"), {
+                page: "Iniciar Sesion",
+                csrfToken: req.csrfToken(),
+                errores: result.array(),
+                user: req.body
+            }
+        }
+    }
+
 export {
     formularioLogin,
     formularioRegister,
@@ -244,5 +283,6 @@ export {
     formularioPasswordRecovery,
     resetPassword,
     checkToken,
-    newPassword
+    newPassword,
+    userAuthentication,
 };
