@@ -2,6 +2,7 @@ import { check, validationResult } from "express-validator";
 import User from "../Models/Users.js";
 import {generateToken, generateId } from "../helpers/tokens.js";
 import { registerEmail, passwordRecoveryEmail } from '../helpers/emails.js';
+import bcrypt from 'bcrypt'
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', {
