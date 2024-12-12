@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 
 import generalRoutes from './routes/generalRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import propertiesRotes from './routes/propertiesRoutes.js'
 import db from './db/config.js'
 import dotenv from 'dotenv'
 
@@ -37,7 +38,7 @@ try {
     console.error('Error en la conexión a la base de datos:', error)
 }
 
-app.use('/', generalRoutes)
+app.use('/', propertiesRotes)
 app.use('/auth', userRoutes)
 
 const port = process.env.PORT
